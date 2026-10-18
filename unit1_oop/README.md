@@ -22,3 +22,18 @@ Although my program was fairly simple, it gave me a starting point for organizin
 In the future, I would like to expand it to track ingredient quantities, update inventory when ingredients are used, calculate recipe costs, and create grocery or supply orders.
 
 I could see how a program like this would be useful both for managing meals at home and for a small restaurant.
+
+
+
+Reflection
+
+This assignment helped me better understand object-oriented programming and how classes could be used to organize information. I learned about inheritance, namespaces, and the differences between shallow and deep copying.
+
+One challenge I encountered was understanding how parent and child classes worked together. Using super() helped me understand how the child class could reuse information and methods from the parent class. I also had some difficulty getting Python to run in IntelliJ, but I eventually figured out how to run the program through the terminal.
+
+Compared to procedural programming, OOP allowed me to keep related information and functions together in classes. Procedural programming would have worked for a small recipe program, but I could see how it might become harder to organize as more recipes and features were added.
+
+OOP required some additional setup when creating the classes, which added a little overhead at the beginning. However, reusing the same classes for different recipes could reduce repeated code and make the program easier to maintain.
+
+I had already been interested in creating a recipe and inventory management system similar to what restaurants use. This assignment gave me a starting point that I could eventually expand to track ingredient quantities, inventory, and recipe costs.
+  
