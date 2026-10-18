@@ -10,89 +10,108 @@ analyze the code to demonstrate understanding of inheritance, namespaces, and ob
 """
 
 
+
+
 from copy import copy, deepcopy
 
 
-# TODO 1:
-# Create a parent class.
-#
-# Requirements:
-# - Include at least one class variable.
-# - Include at least two instance variables.
-# - Include a constructor (__init__).
-# - Include a method that returns or displays information about the object.
-#
-# Replace the pass statement with your implementation.
-
+# TODO 1: Create a parent class with a class variable,
+# a name, an age, and a method to display the information.
 class ParentClass:
-    pass
+    school = "UMGC"
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_info(self):
+        print(self.name, self.age)
 
 
-# TODO 2:
-# Create a child class that inherits from the parent class.
-#
-# Requirements:
-# - Use inheritance.
-# - Add at least one new class variable.
-# - Add at least two new instance variables.
-# - Add at least one new method.
-# - Override a method from the parent class.
-#
-# Replace the pass statement with your implementation.
-
+# TODO 2: Create a child class that inherits from the parent.
+# Add student information, a new method, and change display_info.
 class ChildClass(ParentClass):
-    pass
+    student_type = "Undergraduate"
+
+    def __init__(self, name, age, student_id, major):
+        super().__init__(name, age)
+        self.student_id = student_id
+        self.major = major
+        self.courses = []
+
+    def add_course(self, course):
+        self.courses.append(course)
+
+    # Display the student information instead of just name and age.
+    def display_info(self):
+        print(self.name, self.age, self.student_id, self.major)
+        print(self.courses)
+
+    # TODO 6: My added feature counts the student's courses.
+    def count_courses(self):
+        print("Number of courses:", len(self.courses))
 
 
-# TODO 3:
-# Create a function that demonstrates class namespaces and instance namespaces.
-#
-# Your function should:
-# - Create at least two objects of the child class.
-# - Access a class variable through the class itself.
-# - Access the same class variable through an object.
-# - Add a new attribute to only one object after it is created.
-# - Display each object's namespace using __dict__.
-# - Display information about the class namespace.
-
+# TODO 3: Show the difference between class and object variables.
 def demonstrate_namespaces():
-    print("\n=== Namespace Demonstration ===")
-    print("TODO: Implement namespace demonstration")
+    print("\n=== Namespaces ===")
+
+    # Create two students.
+    s1 = ChildClass("Alex", 20, "101", "Computer Science")
+    s2 = ChildClass("Ben", 22, "102", "Cybersecurity")
+
+    # Access the same class variable two different ways.
+    print(ChildClass.student_type)
+    print(s1.student_type)
+
+    # Add a new attribute to only the first student.
+    s1.hobby = "Gaming"
+
+    # Show what is stored in each student and the class.
+    print(s1.__dict__)
+    print(s2.__dict__)
+    print(ChildClass.__dict__)
 
 
-# TODO 4:
-# Create a function that demonstrates shallow copying and deep copying.
-#
-# Requirements:
-# - Create an object that contains nested mutable data.
-# - Create a shallow copy.
-# - Create a deep copy.
-# - Modify the original object's nested data.
-# - Display the original object, shallow copy, and deep copy.
-# - Use comments to explain the difference between shallow and deep copying.
-
+# TODO 4: Show how shallow and deep copies work.
 def demonstrate_copying():
-    print("\n=== Copy Demonstration ===")
-    print("TODO: Implement shallow copy and deep copy demonstration")
+    print("\n=== Copying ===")
+
+    # Make a list that contains other lists.
+    original = [[1, 2], [3, 4]]
+
+    # Make one shallow copy and one deep copy.
+    shallow = copy(original)
+    deep = deepcopy(original)
+
+    # Change a number in the original list.
+    original[0][0] = 9
+
+    # The shallow copy also changes because it shares the inner lists.
+    # The deep copy stays the same because it has its own inner lists.
+    print("Original:", original)
+    print("Shallow:", shallow)
+    print("Deep:", deep)
 
 
-# TODO 5:
-# Complete the main function.
-#
-# Requirements:
-# - Create at least one object from the parent class.
-# - Create at least one object from the child class.
-# - Demonstrate inheritance by calling methods.
-# - Call your namespace demonstration function.
-# - Call your copy demonstration function.
-
+# TODO 5: Create objects and test the classes and methods.
 def main():
     print("=== Unit 1 OOP Assignment ===")
 
-    print("\nTODO: Create and test your parent object")
+    # Create a person and display their information.
+    person = ParentClass("Cleo", 45)
+    person.display_info()
 
-    print("\nTODO: Create and test your child object")
+    # Create a student, add courses, and display the info.
+    student = ChildClass("Dana", 22, "123", "Computer Science")
+    student.add_course("Python")
+    student.add_course("Java")
+    student.display_info()
 
+    # Test my aded feature.
+    student.count_courses()
+
+    # Run the namespace and copying examples.
     demonstrate_namespaces()
     demonstrate_copying()
 
