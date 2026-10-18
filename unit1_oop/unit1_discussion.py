@@ -45,8 +45,12 @@ class DinnerRecipe(Recipe):
 
         missing = []
 
+        # Make pantry names lowercase so capitalization does not matter.
+        pantry_items = [item.lower() for item in pantry]
+
+
         for ingredient in self.ingredients:
-            if ingredient[0].lower() not in pantry:
+            if ingredient[0].lower() not in pantry_items:
                 missing.append(ingredient[0])
 
         if len(missing) == 0:
