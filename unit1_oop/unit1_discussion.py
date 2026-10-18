@@ -1,4 +1,30 @@
 
+
+"""
+CMSC 315 - Unit 1 Discussion
+What's for Dinner? Recipe Manager
+
+This program demonstrates object-oriented programming in Python
+using a simple recipe management system.
+
+The program includes:
+1. A parent Recipe class and a child DinnerRecipe class.
+2. Inheritance and method overriding.
+3. Class and instance namespaces.
+4. Shallow and deep copying of nested lists.
+5. A main function that tests the program.
+6. Additional features for checking groceries and
+   preventing duplicate ingredients.
+
+The project was inspired by restaurant recipe and inventory
+management systems (something i would love to be able to manage better in home). It provides a starting point for a
+larger program that could eventually track food inventory,
+ingredient quantities, and recipe costs.
+
+Would love an eventual app with my recipes and personal shopping needs
+maybe eventually with recipe amount per person
+"""
+
 from copy import copy, deepcopy
 
 
