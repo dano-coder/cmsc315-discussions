@@ -1,35 +1,24 @@
-# Unit 1 Discussion: Python OOP, Namespaces, and Copying
+Project Overview
 
-## Overview
+For this assignment, I created a simple Recipe Manager using Python.
 
-This assignment explores object-oriented programming (OOP) concepts in Python, including inheritance, namespaces, and object copying.
+I chose this project because I had already been thinking about developing a recipe and inventory management program similar to the systems restaurants use to keep track of ingredients, meals, and supplies.
 
-## Learning Objectives
+I wanted to start with something simple that could eventually be expanded into a larger program.
 
-- Create parent and child classes
-- Use inheritance to extend functionality
-- Understand class and instance namespaces
-- Demonstrate shallow and deep copying
-- Apply object-oriented design principles
+The program stored information about meals, including their names, cooking times, servings, difficulty levels, and ingredients.
 
-## Requirements
+I also added a feature that compared the ingredients needed for a meal with what was already available and identified items that needed to be purchased.
 
-Complete all TODO sections in the source code:
 
-1. Create a parent class.
-2. Create a child class using inheritance.
-3. Demonstrate class and instance namespaces.
-4. Demonstrate shallow and deep copying.
-5. Create and test objects in `main()`.
-6. Add a student-created extension.
+Practical Application
 
-## Discussion Board Reflection
+I had already been interested in creating a program that could help manage recipes and food inventory, similar to what restaurants use.
 
-After completing the programming assignment, add this reflection to your initial discussion post in LEO.
+I thought this assignment would be a good opportunity to start learning how to build something like that using Python.
 
-Your reflection should be approximately 150–200 words and address the following questions:
+Although my program was fairly simple, it gave me a starting point for organizing recipes and checking ingredients.
 
-1. What concepts or skills did you learn while completing this assignment?
-2. What challenges did you encounter, and how did you overcome them?
-3. Compare OOP to procedural programming.
-4. Discuss the benefits of maintainability and reusability and apply this managing overhead, practical application development, and future use.
+In the future, I would like to expand it to track ingredient quantities, update inventory when ingredients are used, calculate recipe costs, and create grocery or supply orders.
+
+I could see how a program like this would be useful both for managing meals at home and for a small restaurant.
