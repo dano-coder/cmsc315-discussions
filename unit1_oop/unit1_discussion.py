@@ -25,9 +25,19 @@ class DinnerRecipe(Recipe):
         self.difficulty = difficulty
         self.ingredients = []
 
+
     # Add an ingredient and the amount needed.
     def add_ingredient(self, name, amount):
+
+        # Check whether the ingredient is already in the recipe.
+        for ingredient in self.ingredients:
+            if ingredient[0].lower() == name.lower():
+                print(name, "is already in this recipe.")
+                return
+
+        # Add the ingredient if it is not already listed.
         self.ingredients.append([name, amount])
+
 
     # Override the parent method to show more information.
     def display_info(self):
@@ -120,11 +130,14 @@ def main():
     # Create a chicken curry dinner.
     curry = DinnerRecipe("Chicken Curry", 40, 4, "Easy")
 
+
     # Add ingredients to the curry.
     curry.add_ingredient("Chicken", "1 pound")
+    curry.add_ingredient("chicken", "2 pounds")  # Test duplicate
     curry.add_ingredient("Rice", "2 cups")
     curry.add_ingredient("Curry Roux", "1 package")
     curry.add_ingredient("Onion", "1")
+
 
     # Display the curry information.
     curry.display_info()
