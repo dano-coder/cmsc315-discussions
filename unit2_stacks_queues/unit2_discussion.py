@@ -78,6 +78,7 @@ class Queue:
         return len(self.items) == 0
 
 
+
 def main():
     print("=== UNIT 2: STACKS AND QUEUES ===")
 
@@ -96,44 +97,117 @@ def main():
     # 7. Create a stack with only one item, remove it,
     #    and verify the stack is empty afterward.
 
+    print("\n=== STACK DEMO: PATIENT CHART CHANGES ===")
 
-print("\n=== STACK DEMO ===")
-print("TODO: Create a Stack object, demonstrate LIFO behavior,")
-print("      test popping from an empty stack,")
-print("      test peeking at an empty stack,")
-print("      and verify a single-item stack becomes empty after removal.")
+    # Create a stack to track changes made to a patient chart.
+    chart_changes = Stack()
 
-# ===============================
-# TODO (Student): QUEUE DEMO
-# ===============================
-# Requirements:
-# 1. Create a Queue object.
-# 2. Add at least 4 values to the queue.
-# 3. Improve the print statements so they clearly explain what is happening.
-# 4. Demonstrate FIFO behavior.
-# 5. Show what happens when dequeue() is used on an empty queue.
-#
-# Edge Cases:
-# 6. Show what happens when front() is used on an empty queue.
-# 7. Create a queue with only one item, remove it,
-#    and verify the queue is empty afterward.
+    # Add four chart changes in the order they were made.
+    chart_changes.push("Updated medication list")
+    chart_changes.push("Added patient note")
+    chart_changes.push("Updated discharge plan")
+    chart_changes.push("Updated patient contact information")
 
-print("\n=== QUEUE DEMO ===")
-print("TODO: Create a Queue object, demonstrate FIFO behavior,")
-print("      test dequeuing from an empty queue,")
-print("      test viewing the front of an empty queue,")
-print("      and verify a single-item queue becomes empty after removal.")
+    print("Four changes have been added to the patient chart.")
 
-if __name__ == "__main__":
-    main()
+    # LIFO means the last chart change added is removed first.
+    print("Undo most recent change:", chart_changes.pop())
+    print("Undo next change:", chart_changes.pop())
 
-# Testing the stack with patient chart changes
-chart_changes = Stack()
+    # Peek shows the most recent remaining change without removing it.
+    print("Next change to undo:", chart_changes.peek())
 
-chart_changes.push("Updated medication list")
-chart_changes.push("Added patient note")
-chart_changes.push("Updated discharge plan")
+    # Remove the remaining changes so the stack becomes empty.
+    print("Undo change:", chart_changes.pop())
+    print("Undo change:", chart_changes.pop())
 
-print(chart_changes.pop())
-print(chart_changes.peek())
-print(chart_changes.is_empty())
+    print("Is the chart change stack empty?", chart_changes.is_empty())
+
+    # Test what happens when trying to remove a change from an empty stack.
+    # The try/except prevents the program from crashing.
+    try:
+        chart_changes.pop()
+    except IndexError:
+        print("Cannot undo a change because the stack is empty.")
+
+    # Test empty stack
+    try:
+        chart_changes.peek()
+    except IndexError:
+        print("Cannot view a chart change because the stack is empty.")
+
+    # Test a stack containing only one chart change.
+    single_change = Stack()
+    single_change.push("Updated patient allergies")
+
+    print("Single chart change:", single_change.pop())
+
+    # Verify that removing the only item leaves the stack empty.
+    print("Is the single-change stack empty?", single_change.is_empty())
+
+
+
+
+    # ===============================
+    # TODO (Student): QUEUE DEMO
+    # ===============================
+    # Requirements:
+    # 1. Create a Queue object.
+    # 2. Add at least 4 values to the queue.
+    # 3. Improve the print statements so they clearly explain what is happening.
+    # 4. Demonstrate FIFO behavior.
+    # 5. Show what happens when dequeue() is used on an empty queue.
+    #
+    # Edge Cases:
+    # 6. Show what happens when front() is used on an empty queue.
+    # 7. Create a queue with only one item, remove it,
+    #    and verify the queue is empty afterward.
+
+    print("\n=== QUEUE DEMO: PATIENT REGISTRATION ===")
+
+    # Create a queue for patients waiting to register.
+    patient_queue = Queue()
+
+    # Add four patients in the order they arrive.
+    patient_queue.enqueue("Patient A")
+    patient_queue.enqueue("Patient B")
+    patient_queue.enqueue("Patient C")
+    patient_queue.enqueue("Patient D")
+
+    print("Four patients have arrived for registration.")
+
+    # FIFO means the first patient added is the first one removed.
+    print("First patient registered:", patient_queue.dequeue())
+    print("Second patient registered:", patient_queue.dequeue())
+
+    # Front shows the next patient without removing them.
+    print("Next patient waiting:", patient_queue.front())
+
+    # Register the remaining patients.
+    print("Next patient registered:", patient_queue.dequeue())
+    print("Last patient registered:", patient_queue.dequeue())
+
+    # Check whether any patients remain in the registration line.
+    print("Is the registration queue empty?", patient_queue.is_empty())
+
+    # Test removing a patient when the queue is empty.
+    # The try/except prevents the program from crashing.
+    try:
+        patient_queue.dequeue()
+    except IndexError:
+        print("Cannot register another patient because the queue is empty.")
+
+    # Test viewing the front of an empty queue.
+    try:
+        patient_queue.front()
+    except IndexError:
+        print("Cannot view the next patient because the queue is empty.")
+
+    # Test a queue containing only one patient.
+    single_patient = Queue()
+    single_patient.enqueue("Patient E")
+
+    print("Single patient registered:", single_patient.dequeue())
+
+    # Verify the queue is empty after registering the only patient.
+    print("Is the single-patient queue empty?", single_patient.is_empty())
