@@ -50,26 +50,32 @@ class Queue:
     def __init__(self):
         # TODO (Student): Create the internal data structure for the queue.
         # Hint: collections.deque is useful for efficient queue operations.
-        pass
+        # Stores patients waiting to be registered
+        self.items = deque()
 
     def enqueue(self, value):
         # TODO (Student): Add value to the back of the queue.
         # Add a short comment explaining why this operation supports FIFO behavior.
-        pass
+        # New Patients are added to the end of the registration line - FIFO
+        self.items.append(value)
 
     def dequeue(self):
         # TODO (Student): Remove and return the value from the front of the queue.
         # Explain or improve empty-queue handling.
+        # Removes the patient who has been waiting the longest - FIFO
+        # If no patients are waiting, return a message instead of crashing
         pass
 
     def front(self):
         # TODO (Student): Return the front value without removing it.
         # Add a comment explaining what front returns.
+        # Shows the next patient waiting to register without removing them.
         pass
 
     def is_empty(self):
         # TODO (Student): Return True if the queue has no values.
-        pass
+        # Returns True when no patients are waiting to be registered
+        return len(self.items) == 0
 
 
 def main():
@@ -120,3 +126,14 @@ print("      and verify a single-item queue becomes empty after removal.")
 
 if __name__ == "__main__":
     main()
+
+# Testing the stack with patient chart changes
+chart_changes = Stack()
+
+chart_changes.push("Updated medication list")
+chart_changes.push("Added patient note")
+chart_changes.push("Updated discharge plan")
+
+print(chart_changes.pop())
+print(chart_changes.peek())
+print(chart_changes.is_empty())
