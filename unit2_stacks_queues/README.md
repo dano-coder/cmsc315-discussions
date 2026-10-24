@@ -7,16 +7,33 @@ This assignment explores two fundamental linear data structures:
 - Stack (LIFO)
 - Queue (FIFO)
 
+This project explored two data structures in Python: stacks and queues.
+I used healthcare examples to demonstrate how each structure stores and removes information.
+
+
 ## Learning Objectives
 
 - Implement stack operations
+  - I created a stack to represent changes made to a patient chart.
+  - Each change was added to the stack, and the most recent change was removed first.
+  - This demonstrated Last In, First Out (LIFO), similar to an undo feature in an electronic medical record.
 - Implement queue operations
+  - I created a queue to represent patients arriving for registration.
+  - Patients were added in arrival order and registered in that same order.
+  - This demonstrated First In, First Out (FIFO).
+  - The example represented registration rather than clinical triage.
 - Understand LIFO and FIFO behavior
+  - LIFO removes the most recently added item first.
+  - FIFO removes the oldest item first.
+  - I demonstrated both using healthcare examples.
 - Create edge cases
+  - I tested both structures when they were empty.
+  - I also tested each structure with only one item.
+  - I used try/except to handle errors.
 
 ## Requirements
 
-Complete all TODO sections:
+Completed all TODO sections:
 
 1. Implement stack operations.
 2. Implement queue operations.
