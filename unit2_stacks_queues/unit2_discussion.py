@@ -32,17 +32,17 @@ class Stack:
         # What should happen if the stack is empty?
         # Stack empty = should return a message instead of closing/crashing
         # Upon completion, method will remove most recent chart change
-         if self.is_empty():
-                    raise IndexError("pop from empty stack")
-                return self.items.pop()
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        return self.items.pop()
 
     def peek(self):
         # TODO (Student): Return the top value without removing it.
         # Add a comment explaining what peek does.
         # Peek will show the most recent chart change w/o removing it
         if self.is_empty():
-                    raise IndexError("peek from empty stack")
-                return self.items[-1]
+            raise IndexError("peek from empty stack")
+        return self.items[-1]
 
     def is_empty(self):
         # TODO (Student): Return True if the stack has no values.
@@ -67,18 +67,18 @@ class Queue:
         # TODO (Student): Remove and return the value from the front of the queue.
         # Explain or improve empty-queue handling.
         # Removes the patient who has been waiting the longest - FIFO
-        # If no patients are waiting, return a message instead of crashing
-                if self.is_empty():
-                    raise IndexError("dequeue from empty queue")
-                return self.items.popleft()
+        # If no patients are waiting, raise an error for main() to handle
+        if self.is_empty():
+            raise IndexError("dequeue from empty queue")
+        return self.items.popleft()
 
     def front(self):
         # TODO (Student): Return the front value without removing it.
         # Add a comment explaining what front returns.
         # Shows the next patient waiting to register without removing them.
-                if self.is_empty():
-                    raise IndexError("front from empty queue")
-                return self.items[0]
+        if self.is_empty():
+            raise IndexError("front from empty queue")
+        return self.items[0]
 
     def is_empty(self):
         # TODO (Student): Return True if the queue has no values.
@@ -221,5 +221,5 @@ def main():
     print("Is the single-patient queue empty?", single_patient.is_empty())
 
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
         main()
