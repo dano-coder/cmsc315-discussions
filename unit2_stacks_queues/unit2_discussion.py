@@ -18,27 +18,32 @@ class Stack:
     def __init__(self):
         # TODO (Student): Create the internal data structure for the stack.
         # Hint: A Python list can be used to store stack values.
-        pass
+        self.items = []
 
     def push(self, value):
         # TODO (Student): Add value to the stack.
         # Add a short comment explaining why this operation supports LIFO behavior.
-        pass
+        # The last chart change added will be the first one removed  (LIFO).
+        self.items.append(value)
 
     def pop(self):
         # TODO (Student): Remove and return the most recently added value.
         # Improve or explain empty-stack handling.
         # What should happen if the stack is empty?
+        # Stack empty = should return a message instead of closing/crashing
+        # Upon completion, method will remove most recent chart change
         pass
 
     def peek(self):
         # TODO (Student): Return the top value without removing it.
         # Add a comment explaining what peek does.
+        # Peek will show the most recent chart change w/o removing it
         pass
 
     def is_empty(self):
         # TODO (Student): Return True if the stack has no values.
-        pass
+        # Will return True when there are no chart changes
+        return len(self.items) == 0
 
 
 class Queue:
