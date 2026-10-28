@@ -1,3 +1,4 @@
+
 """
 ==================================================
 Unit 3 DISCUSSION: List Operations (Insert, Delete, Search)
@@ -22,7 +23,11 @@ def insert_at(lst, index, value):
     - Use comments to explain how insertion performance may vary depending on
       where the insertion occurs.
     """
-    pass
+    # Add a new admission to the specified position.
+    # Existing items shift right to make room for the new admission.
+    # Inserting at the beginning or middle takes O(n) time.
+    # Inserting at the end usually takes O(1) amortized time.
+    lst.insert(index, value)
 
 
 def delete_at(lst, index):
@@ -36,7 +41,14 @@ def delete_at(lst, index):
     - Return None if the index is invalid.
     - Add comments explaining why index validation and safe deletion are important.
     """
-    pass
+    # Check that the index exists before removing an admission.
+    # This prevents errors and unintended deletions.
+    if 0 <= index < len(lst):
+        # Remove the admission and return its value.
+        return lst.pop(index)
+
+    # Return None if the index is invalid.
+    return None
 
 
 def search_value(lst, value):
@@ -49,7 +61,15 @@ def search_value(lst, value):
     - Return -1 if the value is not found.
     - Add comments explaining why this is a linear search and why it scans sequentially.
     """
-    pass
+    # Search each admission one at a time, starting at index 0.
+    # This is a linear search because each item is checked in order.
+    # The worst-case time complexity is O(n).
+    for index, admission in enumerate(lst):
+        if admission == value:
+            return index
+
+    # Return -1 when the admission is not found.
+    return -1
 
 
 def main():
@@ -116,7 +136,6 @@ def main():
 
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate at least two edge cases.")
-
 
 
 if __name__ == "__main__":
