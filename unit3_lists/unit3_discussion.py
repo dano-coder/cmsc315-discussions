@@ -89,8 +89,26 @@ def main():
     # 4. Display the list after each insertion.
     # 5. Use comments to explain each step in the implementation.
 
+
     print("\n=== INSERTION TESTS ===")
-    print("TODO: Create a list and demonstrate insertions.")
+
+    # Start with three example hospital admissions.
+    admissions = ["Admission A", "Admission B", "Admission C"]
+    print("Original admissions:", admissions)
+
+    # Add an admission at the beginning.
+    # The other admissions move over one spot.
+    insert_at(admissions, 0, "Admission D")
+    print("After inserting at the beginning:", admissions)
+
+    # Add an admission in the middle.
+    insert_at(admissions, 2, "Admission E")
+    print("After inserting in the middle:", admissions)
+
+    # Add an admission at the end.
+    insert_at(admissions, len(admissions), "Admission F")
+    print("After inserting at the end:", admissions)
+
 
     # ===============================
     # TODO (Student): DELETION TESTS
@@ -105,8 +123,24 @@ def main():
     # 3. Display the updated list after each deletion.
     # 4. Use comments to clearly explain what is happening in the output.
 
+
     print("\n=== DELETION TESTS ===")
-    print("TODO: Demonstrate deletions from multiple positions.")
+
+    # Remove the first admission from the list.
+    removed = delete_at(admissions, 0)
+    print("Removed from beginning:", removed)
+    print("Updated admissions:", admissions)
+
+    # Remove an admission from the middle.
+    removed = delete_at(admissions, 2)
+    print("Removed from middle:", removed)
+    print("Updated admissions:", admissions)
+
+    # Remove the last admission.
+    removed = delete_at(admissions, len(admissions) - 1)
+    print("Removed from end:", removed)
+    print("Updated admissions:", admissions)
+
 
     # ===============================
     # TODO (Student): SEARCH TESTS
