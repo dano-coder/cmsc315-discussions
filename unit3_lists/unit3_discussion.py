@@ -153,7 +153,15 @@ def main():
     # 4. Use comments to explain each step.
 
     print("\n=== SEARCH TESTS ===")
-    print("TODO: Demonstrate searching for values.")
+
+    # Search for an admission that is still in the list.
+    found_index = search_value(admissions, "Admission E")
+    print("Searching for Admission E:", found_index)
+
+    # Search for something that isn't in the list.
+    missing_index = search_value(admissions, "Admission Z")
+    print("Searching for Admission Z:", missing_index)
+
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -168,8 +176,26 @@ def main():
     # - Delete from an empty list
     # - Use comments to explain each edge case.
 
+
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate at least two edge cases.")
+
+    # Try deleting an admission at an index that doesn't exist.
+    # It should return None instead of causing an error.
+    removed = delete_at(admissions, 20)
+    print("Deleting at invalid index:", removed)
+    print("List after invalid deletion:", admissions)
+
+    # Try adding an admission to an empty list.
+    empty_admissions = []
+    insert_at(empty_admissions, 0, "Admission G")
+    print("After inserting into an empty list:", empty_admissions)
+
+    # Try deleting from an empty list.
+    # Since nothing is there, it should return None.
+    empty_list = []
+    removed = delete_at(empty_list, 0)
+    print("Deleting from an empty list:", removed)
+
 
 
 if __name__ == "__main__":
