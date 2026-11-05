@@ -1,3 +1,4 @@
+
 """
 =========================================================
 UNIT 4 DISCUSSION: BINARY SEARCH TREES (BST)
@@ -17,14 +18,23 @@ class Node:
         # TODO (Student):
         # Store the node's value and initialize references
         # to the left and right child nodes.
-        pass
+
+        # Each value represents a patient medical record ID.
+        self.value = value
+
+        # New nodes start without any children.
+        self.left = None
+        self.right = None
 
 
 class BST:
     def __init__(self):
         # TODO (Student):
         # Initialize an empty Binary Search Tree.
-        pass
+
+        # The root is the starting point for the tree.
+        # It remains None until the first record is added.
+        self.root = None
 
     def insert(self, value):
         """
@@ -97,6 +107,7 @@ class BST:
 
 def main():
     print("=== UNIT 4: BINARY SEARCH TREES ===")
+    print("Medical Records Management System")
 
     # ===============================
     # TODO (Student): BUILD A TREE
@@ -108,53 +119,36 @@ def main():
     # 3. Include values that go into both left
     #    and right subtrees.
     # 4. Display the values inserted.
-    # 5. Use comments to explain why a BST is efficient at reducing search space for each step.
+    # 5. Explain how a BST reduces search space.
 
     print("\n=== TREE CONSTRUCTION ===")
-    print("TODO: Create a BST and insert multiple values.")
+
+    # Create an empty tree for patient medical record IDs.
+    medical_records = BST()
+
+    print("Medical records BST initialized.")
+    print("Root node:", medical_records.root)
+
+    # The remaining insertion requirements will be
+    # completed in Push 2.
 
     # ===============================
     # TODO (Student): IN-ORDER TRAVERSAL
     # ===============================
-    #
-    # Requirements:
-    # 1. Perform an in-order traversal.
-    # 2. Display the traversal results.
-    # 3. Use comments to explain why the traversal produces
-    #    sorted output in a BST.
-
     print("\n=== IN-ORDER TRAVERSAL ===")
-    print("TODO: Display and explain traversal results.")
+    print("Traversal will be implemented in a later push.")
 
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Search for at least two values that exist.
-    # 2. Search for at least two values that do not exist.
-    # 3. Use comments to clearly explain the results.
-
     print("\n=== SEARCH TESTS ===")
-    print("TODO: Demonstrate BST searching.")
+    print("Recursive search will be implemented in Push 3.")
 
     # ===============================
     # TODO (Student): EDGE CASES
     # ===============================
-    #
-    # Demonstrate at least one edge case.
-    #
-    # Example ideas:
-    # - Traverse an empty tree
-    # - Search an empty tree
-    # - Insert duplicate values
-    # - Create a tree with only one node
-    #
-    # Use comments to explain what happens and why.
-
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate and explain an edge case.")
-
+    print("Edge case testing will be implemented in Push 4.")
 
 
 if __name__ == "__main__":
