@@ -126,6 +126,8 @@ If the patient ID matched the current node, the method returned True. If the ID 
 
 When the search reached an empty position, the method returned False because the patient ID was not found.
 
+
+
 ### Implementation
 
 I used recursion to move through the BST without checking every patient record.
@@ -160,3 +162,79 @@ Compared to a linear search, which might require checking every record, a balanc
 I also learned that the efficiency depended on the tree's shape. A balanced BST generally supported searching in O(log N) time, while a highly unbalanced BST could require O(N) time.
 
 This demonstrated why insertion order was important when building a Binary Search Tree.
+
+
+## Push 4: Inorder Traversal and Final Testing
+
+For the fourth and final part of this project, I completed the Binary Search Tree by implementing recursive inorder traversal and testing several edge cases.
+
+I continued using the medical records management system to demonstrate how patient record IDs could be organized, searched, and displayed using a BST.
+
+
+### Implementation
+
+I updated the inorder() method to create an empty list and call the _inorder_recursive() helper method.
+
+The recursive method visited the left subtree first, added the current node's value to the list, and then visited the right subtree.
+
+Because smaller patient IDs were stored on the left and larger IDs were stored on the right, this process returned the patient records in ascending numerical order.
+
+I also retained the recursive insertion and searching methods from the previous development stages.
+
+### Inorder Traversal Results
+
+I tested the completed traversal method using the seven fictional patient record IDs inserted during Push 2.
+
+The program produced the following output:
+
+    === IN-ORDER TRAVERSAL ===
+    Patient IDs in ascending order: [1010, 1025, 1040, 1050, 1060, 1075, 1090]
+
+This confirmed that the inorder traversal correctly organized the records from smallest to largest.
+
+### Edge Case Testing
+
+I also tested three edge cases to determine how the program handled different situations.
+
+The first test involved an empty Binary Search Tree. The program returned an empty list for traversal and False when searching for a patient ID.
+
+The second test involved inserting a duplicate patient ID. I attempted to insert patient ID 1040 again. The program ignored the duplicate, and the tree continued to contain seven unique records.
+
+The third test involved creating a Binary Search Tree with only one patient ID. I inserted patient ID 2000 and confirmed that the traversal returned the single record. Searching for 2000 returned True, while searching for 2001 returned False.
+
+The program produced the following results:
+
+    === EDGE CASES ===
+    Empty tree traversal: []
+    Search 1050 in empty tree: False
+    After inserting duplicate 1040: [1010, 1025, 1040, 1050, 1060, 1075, 1090]
+    Number of records after duplicate: 7
+    Single-node tree traversal: [2000]
+    Search 2000 in single-node tree: True
+    Search 2001 in single-node tree: False
+
+These tests demonstrated that the BST handled empty trees, duplicate values, and single-node trees without errors.
+
+### Real-World Application
+
+I used a medical records management system because healthcare organizations often need to locate records using unique identifiers.
+
+A Binary Search Tree demonstrated one way that numerical patient record IDs could be organized to support searching and retrieval.
+
+In this project, each node represented a fictional patient ID rather than an actual medical record.
+
+Although real healthcare systems would typically use databases and indexing systems, this example helped demonstrate how a BST could organize and search structured information.
+
+### Final Reflection
+
+Completing this project helped me better understand how Binary Search Trees worked and how recursion supported insertion, searching, and traversal.
+
+One of the most useful concepts was seeing how the tree's structure affected searching. When the tree was balanced, the program could locate patient IDs without checking every node.
+
+I also learned that insertion order mattered because inserting values in sequential order could create an unbalanced tree and reduce searching efficiency.
+
+The inorder traversal demonstrated how the BST could display patient IDs in ascending order without requiring a separate sorting operation.
+
+Testing empty trees, duplicate values, and single-node trees also helped me understand why edge cases were important when developing a program.
+
+Overall, this assignment demonstrated how data structures could be applied to a healthcare-related example while reinforcing recursion, algorithm efficiency, and program testing.
