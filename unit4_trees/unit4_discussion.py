@@ -33,7 +33,6 @@ class BST:
         # Initialize an empty Binary Search Tree.
 
         # The root is the starting point for the tree.
-        # It remains None until the first record is added.
         self.root = None
 
     def insert(self, value):
@@ -47,7 +46,10 @@ class BST:
           whether a value is smaller or larger than the
           current node.
         """
-        pass
+
+        # Start at the root and use recursion to find
+        # the correct location for the patient ID.
+        self.root = self._insert_recursive(self.root, value)
 
     def _insert_recursive(self, node, value):
         """
@@ -60,7 +62,24 @@ class BST:
         - Insert larger values into the right subtree.
         - Return the updated node reference.
         """
-        pass
+
+        # An empty position means we can create a new node.
+        if node is None:
+            return Node(value)
+
+        # Smaller patient IDs belong in the left subtree.
+        if value < node.value:
+            node.left = self._insert_recursive(node.left, value)
+
+        # Larger patient IDs belong in the right subtree.
+        elif value > node.value:
+            node.right = self._insert_recursive(node.right, value)
+
+        # Duplicate IDs are ignored because each patient
+        # record should have a unique identifier.
+
+        # Return the node to maintain the tree connections.
+        return node
 
     def search(self, value):
         """
@@ -119,34 +138,65 @@ def main():
     # 3. Include values that go into both left
     #    and right subtrees.
     # 4. Display the values inserted.
-    # 5. Explain how a BST reduces search space.
+    # 5. Use comments to explain why a BST is efficient
+    #    at reducing search space for each step.
 
     print("\n=== TREE CONSTRUCTION ===")
 
-    # Create an empty tree for patient medical record IDs.
+    # Create an empty BST to organize patient records.
     medical_records = BST()
 
     print("Medical records BST initialized.")
     print("Root node:", medical_records.root)
 
-    # The remaining insertion requirements will be
-    # completed in Push 2.
+    # These fictional patient IDs were chosen to create
+    # a balanced tree with left and right subtrees.
+    patient_ids = [1050, 1025, 1075, 1010, 1040, 1060, 1090]
+
+    print("\nInserting patient medical record IDs:")
+
+    for patient_id in patient_ids:
+        medical_records.insert(patient_id)
+        print("Inserted patient ID:", patient_id)
+
+    # Each comparison directs insertion into one subtree.
+    # This avoids checking unrelated branches and can
+    # reduce the amount of work needed during searches.
+
+    print("\nBST construction completed.")
+    print("Root patient ID:", medical_records.root.value)
 
     # ===============================
     # TODO (Student): IN-ORDER TRAVERSAL
     # ===============================
+    #
+    # Requirements:
+    # 1. Perform an in-order traversal.
+    # 2. Display the traversal results.
+    # 3. Explain why traversal produces sorted output.
+
     print("\n=== IN-ORDER TRAVERSAL ===")
-    print("Traversal will be implemented in a later push.")
+    print("Traversal will be implemented in Push 4.")
 
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
+    #
+    # Requirements:
+    # 1. Search for at least two existing values.
+    # 2. Search for at least two missing values.
+    # 3. Explain the results.
+
     print("\n=== SEARCH TESTS ===")
     print("Recursive search will be implemented in Push 3.")
 
     # ===============================
     # TODO (Student): EDGE CASES
     # ===============================
+    #
+    # Demonstrate at least one edge case.
+    # Examples: empty tree, duplicates, or single node.
+
     print("\n=== EDGE CASES ===")
     print("Edge case testing will be implemented in Push 4.")
 
