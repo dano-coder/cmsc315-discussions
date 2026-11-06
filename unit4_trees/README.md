@@ -114,12 +114,49 @@ I also learned that insertion order affected the overall structure of the tree. 
 
 However, inserting patient IDs in sequential order could create an unbalanced tree that behaved more like a linked list. This would reduce the performance benefits of using a BST.
 
-## Remaining Development
 
-The following functionality was planned for the remaining stages of the assignment:
 
-Push 3: Implement recursive searching to locate existing and missing patient record IDs.
+## Push 3: Recursive BST Searching
 
-Push 4: Implement in-order traversal and demonstrate edge cases, including empty trees and duplicate patient IDs.
+For the third part of this project, I implemented recursive searching to locate patient medical record IDs within the Binary Search Tree.
 
-Push 5: Complete the medical records demonstration, perform final testing, and update the project documentation and discussion reflection.
+I updated the search() method to call the _search_recursive() helper method. The search started at the root and compared the requested patient ID with the current node.
+
+If the patient ID matched the current node, the method returned True. If the ID was smaller, the program searched the left subtree. If the ID was larger, it searched the right subtree.
+
+When the search reached an empty position, the method returned False because the patient ID was not found.
+
+### Implementation
+
+I used recursion to move through the BST without checking every patient record.
+
+The search algorithm followed the ordering rules established during insertion. This allowed the program to eliminate unrelated branches from consideration.
+
+For example, searching for patient ID 1040 followed the path from 1050 to 1025 and then to 1040.
+
+### Testing and Results
+
+I tested the search method using two patient IDs that existed in the tree and two that did not exist.
+
+The program produced the following results:
+
+    === SEARCH TESTS ===
+    Searching for existing patient IDs:
+    Patient ID: 1040 | Found: True
+    Patient ID: 1090 | Found: True
+
+    Searching for missing patient IDs:
+    Patient ID: 1035 | Found: False
+    Patient ID: 1100 | Found: False
+
+The tests demonstrated how the program identified existing patient records and handled missing records without errors.
+
+### Reflection
+
+This stage helped me understand how recursive searching could improve efficiency when working with organized data.
+
+Compared to a linear search, which might require checking every record, a balanced BST could reduce the number of comparisons needed to locate a patient ID.
+
+I also learned that the efficiency depended on the tree's shape. A balanced BST generally supported searching in O(log N) time, while a highly unbalanced BST could require O(N) time.
+
+This demonstrated why insertion order was important when building a Binary Search Tree.

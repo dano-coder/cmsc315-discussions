@@ -92,14 +92,34 @@ class BST:
         - Add comments explaining why BST search is often
           more efficient than linear search.
         """
-        pass
+
+        # Start searching at the root of the tree.
+        # A BST can avoid checking unrelated branches
+        # because values are organized by size.
+        return self._search_recursive(self.root, value)
 
     def _search_recursive(self, node, value):
         """
         TODO (Student):
         Implement recursive BST search.
         """
-        pass
+
+        # If we reach an empty position, the ID
+        # does not exist in the tree.
+        if node is None:
+            return False
+
+        # If the ID matches, the record was found.
+        if value == node.value:
+            return True
+
+        # Search the left subtree for smaller IDs.
+        elif value < node.value:
+            return self._search_recursive(node.left, value)
+
+        # Search the right subtree for larger IDs.
+        else:
+            return self._search_recursive(node.right, value)
 
     def inorder(self):
         """
@@ -149,8 +169,7 @@ def main():
     print("Medical records BST initialized.")
     print("Root node:", medical_records.root)
 
-    # These fictional patient IDs were chosen to create
-    # a balanced tree with left and right subtrees.
+    # Fictional patient IDs chosen to create a balanced tree.
     patient_ids = [1050, 1025, 1075, 1010, 1040, 1060, 1090]
 
     print("\nInserting patient medical record IDs:")
@@ -159,9 +178,9 @@ def main():
         medical_records.insert(patient_id)
         print("Inserted patient ID:", patient_id)
 
-    # Each comparison directs insertion into one subtree.
-    # This avoids checking unrelated branches and can
-    # reduce the amount of work needed during searches.
+    # Each comparison reduces the search to one subtree.
+    # This avoids checking unrelated branches when the
+    # tree is reasonably balanced.
 
     print("\nBST construction completed.")
     print("Root patient ID:", medical_records.root.value)
@@ -188,7 +207,27 @@ def main():
     # 3. Explain the results.
 
     print("\n=== SEARCH TESTS ===")
-    print("Recursive search will be implemented in Push 3.")
+
+    # Two patient IDs that exist in the tree.
+    existing_ids = [1040, 1090]
+
+    # Two patient IDs that do not exist in the tree.
+    missing_ids = [1035, 1100]
+
+    print("Searching for existing patient IDs:")
+
+    for patient_id in existing_ids:
+        result = medical_records.search(patient_id)
+        print("Patient ID:", patient_id, "| Found:", result)
+
+    print("\nSearching for missing patient IDs:")
+
+    for patient_id in missing_ids:
+        result = medical_records.search(patient_id)
+        print("Patient ID:", patient_id, "| Found:", result)
+
+    # True means the patient ID was found.
+    # False means the ID was not in the tree.
 
     # ===============================
     # TODO (Student): EDGE CASES
