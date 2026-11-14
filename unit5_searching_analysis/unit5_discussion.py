@@ -12,6 +12,9 @@ You will demonstrate your understanding by modifying the
 provided code, running experiments on different dataset sizes,
 and clearly explaining your results through code comments
 and program output.
+
+Example: Hospital admission and patient tracking.
+All admission IDs are fictional.
 """
 
 
@@ -23,10 +26,9 @@ def linear_search(lst, target):
     """
 
     # Check each hospital admission ID one at a time.
-    # Linear search is O(n) because we may need
+    # Linear search is O(n) because we might need
     # to check every ID before finding a match.
     for index in range(len(lst)):
-
         if lst[index] == target:
             return index
 
@@ -36,10 +38,8 @@ def linear_search(lst, target):
 
 def binary_search(lst, target):
     """
-    Search a sorted list for an admission ID.
-
-    Binary search starts in the middle and
-    reduces the search area with each comparison.
+    Search a sorted list by checking the middle value.
+    Return the index if found, or -1 if missing.
     """
 
     # Start at both ends of the sorted list.
@@ -55,20 +55,16 @@ def binary_search(lst, target):
             return middle
 
         elif lst[middle] < target:
-            # The ID must be in the upper half.
-            # We can ignore everything below middle.
+            # Ignore the lower half of the list.
             left = middle + 1
 
         else:
-            # The ID must be in the lower half.
-            # We can ignore everything above middle.
+            # Ignore the upper half of the list.
             right = middle - 1
 
-    # Return -1 if the admission is missing.
+    # Binary search is O(log n) because it cuts
+    # the remaining search area in half each time.
     return -1
-
-    # Binary search is O(log n) because each
-    # comparison cuts the remaining list in half.
 
 
 def count_linear_comparisons(lst, target):
@@ -89,7 +85,7 @@ def count_linear_comparisons(lst, target):
 
 def count_binary_comparisons(lst, target):
     """
-    Count how many admission IDs binary search checks.
+    Count how many middle values binary search checks.
     """
 
     comparisons = 0
@@ -113,6 +109,27 @@ def count_binary_comparisons(lst, target):
     return comparisons
 
 
+def show_results(admissions, target):
+    """
+    Compare both search algorithms on the same list.
+    The admission IDs must be sorted for binary search.
+    """
+
+    print("\nSearching for admission:", target)
+
+    linear_result = linear_search(admissions, target)
+    binary_result = binary_search(admissions, target)
+
+    print("Linear search index:", linear_result)
+    print("Binary search index:", binary_result)
+
+    # Check that both algorithms agree.
+    if linear_result == binary_result:
+        print("Both searches returned the same result.")
+    else:
+        print("Search results did not match.")
+
+
 def main():
     print("=== UNIT 5: SEARCH ALGORITHMS ===")
     print("Hospital Admission Tracking")
@@ -121,37 +138,21 @@ def main():
     # SMALL DATASET
     # ===============================
 
-    # A small sorted list of fictional admission IDs.
-    admissions = [1001, 1005, 1010, 1015, 1020]
-
     print("\n=== SMALL DATASET TEST ===")
-    print("Admission IDs:", admissions)
+
+    # A small sorted list of fictional admission IDs.
+    small_admissions = [1001, 1005, 1010, 1015, 1020]
+
+    print("Admission IDs:", small_admissions)
 
     # Search for an admission that exists.
-    target = 1015
+    show_results(small_admissions, 1015)
 
-    print("\nSearching for admission:", target)
+    # Search for an admission that is missing.
+    show_results(small_admissions, 1099)
 
-    print("Linear search index:",
-          linear_search(admissions, target))
-
-    print("Binary search index:",
-          binary_search(admissions, target))
-
-    # Both methods should return index 3.
-
-    # Search for an admission that does not exist.
-    target = 1099
-
-    print("\nSearching for admission:", target)
-
-    print("Linear search index:",
-          linear_search(admissions, target))
-
-    print("Binary search index:",
-          binary_search(admissions, target))
-
-    # Both methods should return -1.
+    # Both methods should find 1015 at index 3.
+    # Both should return -1 for missing ID 1099.
 
     # ===============================
     # LARGE DATASET
@@ -159,22 +160,17 @@ def main():
 
     print("\n=== LARGE DATASET TEST ===")
 
-    # Create 10,000 fictional hospital admission IDs.
+    # Create 10,000 sorted admission IDs.
     large_admissions = list(range(10001, 20001))
 
     # Search for the last admission ID.
     target = 20000
 
     print("Total admissions:", len(large_admissions))
-    print("Searching for admission:", target)
 
-    print("\nLinear search index:",
-          linear_search(large_admissions, target))
+    show_results(large_admissions, target)
 
-    print("Binary search index:",
-          binary_search(large_admissions, target))
-
-    # Count how many comparisons each algorithm makes.
+    # Compare how many IDs each algorithm checks.
     linear_checks = count_linear_comparisons(
         large_admissions, target
     )
@@ -186,32 +182,115 @@ def main():
     print("\nLinear search comparisons:", linear_checks)
     print("Binary search comparisons:", binary_checks)
 
-    # Linear search checks all 10,000 IDs because
-    # the admission we want is at the end.
-
+    # Linear search checks all 10,000 admission IDs.
     # Binary search only needs 14 comparisons.
-    # It keeps removing half of the remaining IDs.
-
-    # This is why binary search is more efficient
+    # This shows why binary search is more efficient
     # when working with large sorted datasets.
 
     # ===============================
-    # TODO (Student): EDGE CASES
+    # EDGE CASES
     # ===============================
-    #
-    # Demonstrate at least two edge cases.
-    #
-    # Example ideas:
-    # - Empty list
-    # - Single-element list
-    # - Value not present
-    # - Value at the first position
-    # - Value at the last position
-    #
-    # Explain what happens in each case.
 
     print("\n=== EDGE CASE TESTS ===")
-    print("TODO: Demonstrate and explain edge cases.")
+
+    # Edge case 1: Empty admission list.
+    print("\nEdge Case 1: Empty admission list")
+
+    empty_admissions = []
+    show_results(empty_admissions, 1001)
+
+    # Both methods return -1 because the list is empty.
+
+    # Edge case 2: Only one admission in the list.
+    print("\nEdge Case 2: Single admission")
+
+    one_admission = [1001]
+    show_results(one_admission, 1001)
+
+    # Both methods return index 0.
+
+    # Edge case 3: Admission is missing.
+    print("\nEdge Case 3: Missing admission")
+
+    show_results(small_admissions, 9999)
+
+    # Both methods return -1.
+
+    # Edge case 4: First admission in the list.
+    print("\nEdge Case 4: First admission")
+
+    show_results(small_admissions, 1001)
+
+    # Both methods return index 0.
+
+    # Edge case 5: Last admission in the list.
+    print("\nEdge Case 5: Last admission")
+
+    show_results(small_admissions, 1020)
+
+    # Both methods return index 4.
+
+    # ===============================
+    # REAL-WORLD HOSPITAL EXAMPLE
+    # ===============================
+
+    print("\n=== HOSPITAL ADMISSION LOOKUP ===")
+
+    # Fictional admission records and assigned units.
+    patient_records = {
+        1001: "Emergency Department",
+        1005: "Medical Surgical Unit",
+        1010: "Intensive Care Unit",
+        1015: "Cardiac Unit",
+        1020: "Observation Unit"
+    }
+
+    # Sort the IDs before using binary search.
+    admission_ids = sorted(patient_records.keys())
+
+    # A social worker needs to locate an admission.
+    target = 1015
+
+    print("Looking up admission ID:", target)
+
+    result = binary_search(admission_ids, target)
+
+    if result != -1:
+        admission_id = admission_ids[result]
+
+        print("Admission found.")
+        print("Admission ID:", admission_id)
+        print("Assigned unit:", patient_records[admission_id])
+
+    else:
+        print("Admission not found.")
+
+    # In a hospital, staff often need to locate
+    # admission records and assigned units quickly.
+
+    # Linear search could work for a small list
+    # of recent admissions that is not sorted.
+
+    # Binary search is useful when working with
+    # thousands of sorted admission IDs.
+
+    # Sorting also takes time, so binary search
+    # makes more sense when records are already
+    # sorted or will be searched repeatedly.
+
+    # ===============================
+    # FINAL COMPARISON
+    # ===============================
+
+    print("\n=== FINAL COMPARISON ===")
+
+    print("Linear search: O(n)")
+    print("Binary search: O(log n)")
+
+    print("\nLinear search checks IDs one at a time.")
+    print("Binary search repeatedly cuts the search area in half.")
+
+    print("\nAll search tests completed.")
 
 
 if __name__ == "__main__":
