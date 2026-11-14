@@ -145,5 +145,5 @@ hospital admission dataset.
 Push 2: Added binary search and compared performance
 using 10,000 admission IDs.
 
-Push 3: Completed edge case testing and added the
-hospital admission lookup scenario.
+Push 3: Completed edge case testing. Added the
+hospital admission lookup scenario. 
