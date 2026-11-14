@@ -23,6 +23,8 @@ def linear_search(lst, target):
     """
 
     # Check each hospital admission ID one at a time.
+    # Linear search is O(n) because we may need
+    # to check every ID before finding a match.
     for index in range(len(lst)):
 
         if lst[index] == target:
@@ -31,24 +33,84 @@ def linear_search(lst, target):
     # No matching admission was found.
     return -1
 
-    # Linear search has O(n) time complexity because
-    # it may need to check every item in the list.
-
 
 def binary_search(lst, target):
     """
-    TODO (Student):
-    Implement a binary search algorithm.
+    Search a sorted list for an admission ID.
 
-    Requirements:
-    - Assume the list is already sorted.
-    - Repeatedly reduce the search space by half.
-    - Return the index if the target is found.
-    - Return -1 if the target is not found.
-    - Add comments explaining how each iteration
-      reduces the search space.
+    Binary search starts in the middle and
+    reduces the search area with each comparison.
     """
-    pass
+
+    # Start at both ends of the sorted list.
+    left = 0
+    right = len(lst) - 1
+
+    while left <= right:
+
+        # Find the middle admission ID.
+        middle = (left + right) // 2
+
+        if lst[middle] == target:
+            return middle
+
+        elif lst[middle] < target:
+            # The ID must be in the upper half.
+            # We can ignore everything below middle.
+            left = middle + 1
+
+        else:
+            # The ID must be in the lower half.
+            # We can ignore everything above middle.
+            right = middle - 1
+
+    # Return -1 if the admission is missing.
+    return -1
+
+    # Binary search is O(log n) because each
+    # comparison cuts the remaining list in half.
+
+
+def count_linear_comparisons(lst, target):
+    """
+    Count how many admission IDs linear search checks.
+    """
+
+    comparisons = 0
+
+    for value in lst:
+        comparisons += 1
+
+        if value == target:
+            return comparisons
+
+    return comparisons
+
+
+def count_binary_comparisons(lst, target):
+    """
+    Count how many admission IDs binary search checks.
+    """
+
+    comparisons = 0
+    left = 0
+    right = len(lst) - 1
+
+    while left <= right:
+
+        middle = (left + right) // 2
+        comparisons += 1
+
+        if lst[middle] == target:
+            return comparisons
+
+        elif lst[middle] < target:
+            left = middle + 1
+
+        else:
+            right = middle - 1
+
+    return comparisons
 
 
 def main():
@@ -59,7 +121,7 @@ def main():
     # SMALL DATASET
     # ===============================
 
-    # Create a small sorted list of admission IDs.
+    # A small sorted list of fictional admission IDs.
     admissions = [1001, 1005, 1010, 1015, 1020]
 
     print("\n=== SMALL DATASET TEST ===")
@@ -67,41 +129,71 @@ def main():
 
     # Search for an admission that exists.
     target = 1015
-    result = linear_search(admissions, target)
 
     print("\nSearching for admission:", target)
-    print("Linear search index:", result)
 
-    # The admission should be found at index 3.
-    if result != -1:
-        print("Admission found.")
-    else:
-        print("Admission not found.")
+    print("Linear search index:",
+          linear_search(admissions, target))
+
+    print("Binary search index:",
+          binary_search(admissions, target))
+
+    # Both methods should return index 3.
 
     # Search for an admission that does not exist.
     target = 1099
-    result = linear_search(admissions, target)
 
     print("\nSearching for admission:", target)
-    print("Linear search index:", result)
 
-    # The result should be -1.
-    if result == -1:
-        print("Admission not found, as expected.")
+    print("Linear search index:",
+          linear_search(admissions, target))
+
+    print("Binary search index:",
+          binary_search(admissions, target))
+
+    # Both methods should return -1.
 
     # ===============================
-    # TODO (Student): LARGE DATASET
+    # LARGE DATASET
     # ===============================
-    #
-    # Requirements:
-    # 1. Create a much larger sorted dataset.
-    # 2. Test both search algorithms.
-    # 3. Compare the results.
-    # 4. Use comments to explain why binary search becomes
-    #    more efficient as datasets grow larger.
 
     print("\n=== LARGE DATASET TEST ===")
-    print("TODO: Create a larger dataset and compare results.")
+
+    # Create 10,000 fictional hospital admission IDs.
+    large_admissions = list(range(10001, 20001))
+
+    # Search for the last admission ID.
+    target = 20000
+
+    print("Total admissions:", len(large_admissions))
+    print("Searching for admission:", target)
+
+    print("\nLinear search index:",
+          linear_search(large_admissions, target))
+
+    print("Binary search index:",
+          binary_search(large_admissions, target))
+
+    # Count how many comparisons each algorithm makes.
+    linear_checks = count_linear_comparisons(
+        large_admissions, target
+    )
+
+    binary_checks = count_binary_comparisons(
+        large_admissions, target
+    )
+
+    print("\nLinear search comparisons:", linear_checks)
+    print("Binary search comparisons:", binary_checks)
+
+    # Linear search checks all 10,000 IDs because
+    # the admission we want is at the end.
+
+    # Binary search only needs 14 comparisons.
+    # It keeps removing half of the remaining IDs.
+
+    # This is why binary search is more efficient
+    # when working with large sorted datasets.
 
     # ===============================
     # TODO (Student): EDGE CASES
