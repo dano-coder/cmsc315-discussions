@@ -33,24 +33,23 @@ def main():
 
     print("\n=== INSERT OPERATIONS ===")
 
-    # Start with an empty dictionary.
-    # Patient IDs are the keys and hospital units are the values.
+    # Start with an empty dictionary to track hospital patients.
+    # Patient IDs are our keys, and hospital units are the values.
     patients = {}
 
-    # Dictionaries use hashing to help find keys quickly.
-    # We don't have to search through every patient one by one.
+    # Add five fictional patient records.
     patients[1001] = "Emergency Department"
-    patients[1005] = "Medical Surgical Unit"
-    patients[1010] = "Intensive Care Unit"
-    patients[1015] = "Cardiac Unit"
-    patients[1020] = "Observation Unit"
+    patients[1002] = "Intensive Care Unit"
+    patients[1003] = "Cardiac Unit"
+    patients[1004] = "Medical Surgical Unit"
+    patients[1005] = "Observation Unit"
 
+    # Dictionaries use hashing to store and find keys.
+    # We can look up a patient without checking every record.
     print("Current patient records:")
 
     for patient_id, unit in patients.items():
-        print("Patient", patient_id, ":", unit)
-
-    print("Total patients:", len(patients))
+        print("Patient ID:", patient_id, "| Unit:", unit)
 
     # ===============================
     # TODO (Student): LOOKUP OPERATIONS
@@ -63,10 +62,12 @@ def main():
 
     print("\n=== LOOKUP OPERATIONS ===")
 
-    # get() lets us look up a patient using their ID.
-    # This is useful when we need to find their assigned unit.
-    print("Patient 1001:", patients.get(1001))
-    print("Patient 1015:", patients.get(1015))
+    # get() finds the hospital unit connected to a patient ID.
+    print("Looking up patient 1002:")
+    print("Assigned unit:", patients.get(1002))
+
+    print("Looking up patient 1004:")
+    print("Assigned unit:", patients.get(1004))
 
     # ===============================
     # TODO (Student): UPDATE OPERATIONS
@@ -79,7 +80,20 @@ def main():
     #    a new value.
 
     print("\n=== UPDATE OPERATIONS ===")
-    print("TODO: Demonstrate updating an existing key.")
+
+    # Patient 1002 is transferring to another hospital unit.
+    print("Before updating patient 1002:")
+    print(patients)
+
+    # Using an existing key changes its value.
+    # It doesn't create a second patient record.
+    patients[1002] = "Cardiac Unit"
+
+    print("After updating patient 1002:")
+    print(patients)
+
+    print("Patient 1002 is now in:", patients[1002])
+    print("Total patient records:", len(patients))
 
     # ===============================
     # TODO (Student): DELETE OPERATIONS
@@ -91,7 +105,21 @@ def main():
     # 3. Use comments to explain what happens when a key is removed.
 
     print("\n=== DELETE OPERATIONS ===")
-    print("TODO: Demonstrate deleting a key-value pair.")
+
+    # Let's say patient 1005 has been discharged.
+    print("Before removing patient 1005:")
+    print(patients)
+
+    # pop() removes the key and its connected value.
+    # It also gives us the old value if we want to print it.
+    removed_unit = patients.pop(1005)
+
+    print("Removed patient 1005 from:", removed_unit)
+
+    print("After removing patient 1005:")
+    print(patients)
+
+    print("Total patient records:", len(patients))
 
     # ===============================
     # TODO (Student): EDGE CASES
