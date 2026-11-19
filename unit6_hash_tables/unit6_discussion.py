@@ -1,3 +1,4 @@
+
 """
 ====================================================
 UNIT 6 DISCUSSION: Python Dictionaries as Hash Tables
@@ -12,7 +13,6 @@ common operations and explain key concepts.
 
 Follow all TODO prompts in the code and ensure your output
 clearly communicates what your program is doing at each step.
-
 ----------------------------------------------------
 """
 
@@ -31,9 +31,26 @@ def main():
     #    behaves like a hash table.
     # 4. Display the contents of the dictionary.
 
-
     print("\n=== INSERT OPERATIONS ===")
-    print("TODO: Create a dictionary and add multiple key-value pairs.")
+
+    # Start with an empty dictionary.
+    # Patient IDs are the keys and hospital units are the values.
+    patients = {}
+
+    # Dictionaries use hashing to help find keys quickly.
+    # We don't have to search through every patient one by one.
+    patients[1001] = "Emergency Department"
+    patients[1005] = "Medical Surgical Unit"
+    patients[1010] = "Intensive Care Unit"
+    patients[1015] = "Cardiac Unit"
+    patients[1020] = "Observation Unit"
+
+    print("Current patient records:")
+
+    for patient_id, unit in patients.items():
+        print("Patient", patient_id, ":", unit)
+
+    print("Total patients:", len(patients))
 
     # ===============================
     # TODO (Student): LOOKUP OPERATIONS
@@ -45,7 +62,11 @@ def main():
     # 3. Add meaningful comments to explain how the lookup works.
 
     print("\n=== LOOKUP OPERATIONS ===")
-    print("TODO: Demonstrate successful key lookups.")
+
+    # get() lets us look up a patient using their ID.
+    # This is useful when we need to find their assigned unit.
+    print("Patient 1001:", patients.get(1001))
+    print("Patient 1015:", patients.get(1015))
 
     # ===============================
     # TODO (Student): UPDATE OPERATIONS
@@ -88,7 +109,6 @@ def main():
 
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate and explain edge cases.")
-
 
 
 if __name__ == "__main__":
