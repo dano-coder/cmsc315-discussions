@@ -33,23 +33,25 @@ def main():
 
     print("\n=== INSERT OPERATIONS ===")
 
-    # Start with an empty dictionary to track hospital patients.
-    # Patient IDs are our keys, and hospital units are the values.
+    # Use a dictionary to track fictional hospital patients.
+    # Patient IDs are keys, and hospital units are values.
     patients = {}
 
-    # Add five fictional patient records.
+    # Add five patient records.
     patients[1001] = "Emergency Department"
     patients[1002] = "Intensive Care Unit"
     patients[1003] = "Cardiac Unit"
     patients[1004] = "Medical Surgical Unit"
     patients[1005] = "Observation Unit"
 
-    # Dictionaries use hashing to store and find keys.
-    # We can look up a patient without checking every record.
+    # Python dictionaries use hashing behind the scenes.
+    # This lets us find records pretty quickly using their keys.
     print("Current patient records:")
 
     for patient_id, unit in patients.items():
         print("Patient ID:", patient_id, "| Unit:", unit)
+
+    print("Total patient records:", len(patients))
 
     # ===============================
     # TODO (Student): LOOKUP OPERATIONS
@@ -62,7 +64,8 @@ def main():
 
     print("\n=== LOOKUP OPERATIONS ===")
 
-    # get() finds the hospital unit connected to a patient ID.
+    # get() lets us find a patient using their ID.
+    # We don't have to search through every patient manually.
     print("Looking up patient 1002:")
     print("Assigned unit:", patients.get(1002))
 
@@ -81,18 +84,18 @@ def main():
 
     print("\n=== UPDATE OPERATIONS ===")
 
-    # Patient 1002 is transferring to another hospital unit.
+    # Patient 1002 is moving to another hospital unit.
     print("Before updating patient 1002:")
     print(patients)
 
-    # Using an existing key changes its value.
-    # It doesn't create a second patient record.
+    # Using the same key updates the value.
+    # It doesn't create another patient with the same ID.
     patients[1002] = "Cardiac Unit"
 
     print("After updating patient 1002:")
     print(patients)
 
-    print("Patient 1002 is now in:", patients[1002])
+    print("Updated unit:", patients[1002])
     print("Total patient records:", len(patients))
 
     # ===============================
@@ -106,12 +109,11 @@ def main():
 
     print("\n=== DELETE OPERATIONS ===")
 
-    # Let's say patient 1005 has been discharged.
+    # Patient 1005 has been discharged.
     print("Before removing patient 1005:")
     print(patients)
 
-    # pop() removes the key and its connected value.
-    # It also gives us the old value if we want to print it.
+    # pop() removes the patient and returns their old unit.
     removed_unit = patients.pop(1005)
 
     print("Removed patient 1005 from:", removed_unit)
@@ -136,7 +138,92 @@ def main():
     # Explain what happens in each case.
 
     print("\n=== EDGE CASES ===")
-    print("TODO: Demonstrate and explain edge cases.")
+
+    # Edge case 1: Look up a patient who isn't in our system.
+    # get() lets us provide a message instead of getting an error.
+    print("\nEdge case 1: Missing patient lookup")
+    missing_patient = patients.get(9999, "Patient not found")
+    print("Patient 9999:", missing_patient)
+
+    # Edge case 2: Try removing a patient who doesn't exist.
+    # Using pop() with a default value avoids a KeyError.
+    print("\nEdge case 2: Remove missing patient")
+    removed = patients.pop(9999, None)
+
+    if removed is None:
+        print("Patient 9999 wasn't found, so nothing was removed.")
+
+    print("Total patient records:", len(patients))
+
+    # Edge case 3: Try looking up a patient in an empty dictionary.
+    print("\nEdge case 3: Empty dictionary")
+    empty_patients = {}
+
+    print("Empty patient records:", empty_patients)
+    print("Looking up patient 1001:",
+          empty_patients.get(1001, "Patient not found"))
+
+    # Edge case 4: Try adding a patient ID that already exists.
+    # The old value gets replaced instead of making a duplicate.
+    print("\nEdge case 4: Duplicate patient ID")
+
+    print("Patient 1003 before:", patients[1003])
+    records_before = len(patients)
+
+    patients[1003] = "Neurology Unit"
+
+    print("Patient 1003 after:", patients[1003])
+    print("Records before:", records_before)
+    print("Records after:", len(patients))
+    print("Same ID updated instead of adding another record.")
+
+    # ===============================
+    # COLLISION DEMONSTRATION
+    # ===============================
+
+    print("\n=== HASH COLLISION DEMONSTRATION ===")
+
+    # A simple example using 5 possible buckets.
+    # This isn't Python's actual dictionary hash function.
+    # It just helps us see how collisions can happen.
+    bucket_count = 5
+
+    patient_a = 1001
+    patient_b = 1006
+
+    bucket_a = patient_a % bucket_count
+    bucket_b = patient_b % bucket_count
+
+    print("Patient", patient_a, "maps to bucket", bucket_a)
+    print("Patient", patient_b, "maps to bucket", bucket_b)
+
+    if bucket_a == bucket_b:
+        print("Collision: Both IDs mapped to the same bucket.")
+
+    # A real hash table needs a way to deal with collisions.
+    # Separate chaining can keep multiple entries in one bucket.
+    # Open addressing looks for another available location.
+    #
+    # Python dictionaries handle collisions internally.
+    # Too many collisions can make lookups slower because
+    # the table has more work to do to find the correct key.
+
+    print("Separate chaining stores multiple entries in a bucket.")
+    print("Open addressing searches for another available slot.")
+    print("Python handles dictionary collisions automatically.")
+
+    # ===============================
+    # FINAL SUMMARY
+    # ===============================
+
+    print("\n=== FINAL SUMMARY ===")
+
+    print("Final patient records:")
+    for patient_id, unit in patients.items():
+        print("Patient ID:", patient_id, "| Unit:", unit)
+
+    print("Total records:", len(patients))
+    print("All dictionary operations completed.")
 
 
 if __name__ == "__main__":
