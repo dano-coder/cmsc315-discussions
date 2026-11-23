@@ -33,25 +33,25 @@ def bubble_sort(lst):
 
     """
 
-    # Create a copy of the original list
+    # Making a copy so I don't change the original scores
     sorted_list = lst.copy()
 
-    # Get the number of patient acuity scores
+    # Checking how many scores I'm working with
     n = len(sorted_list)
 
-    # Loop through the list to sort the values
+    # Going through the list to get everything in order
     for i in range(n - 1):
 
-        # Track whether any swaps are made
+        # Keeping track of whether anything needed to be swapped
         swapped = False
 
-        # Compare adjacent patient acuity scores
+        # Looking at two scores next to each other
         for j in range(n - 1 - i):
 
-            # Higher scores indicate higher placement priority
+            # Higher acuity means higher priority, so it goes first
             if sorted_list[j] < sorted_list[j + 1]:
 
-                # Swap values if they are out of order
+                # Switching the scores if they're in the wrong order
                 sorted_list[j], sorted_list[j + 1] = (
                     sorted_list[j + 1],
                     sorted_list[j]
@@ -59,11 +59,11 @@ def bubble_sort(lst):
 
                 swapped = True
 
-        # Stop if no swaps were needed
+        # If nothing changed, the list is already sorted
         if not swapped:
             break
 
-    # Return the sorted list
+    # Sending back the sorted scores
     return sorted_list
 
 
@@ -81,7 +81,24 @@ def merge_sort(lst):
     - Add meaningful comments.
 
     """
-    pass
+
+    # A list with one or no scores doesn't need sorting
+    if len(lst) <= 1:
+        return lst.copy()
+
+    # Finding the middle so I can split the list
+    middle = len(lst) // 2
+
+    # Splitting the scores into two smaller groups
+    left_half = lst[:middle]
+    right_half = lst[middle:]
+
+    # Running merge sort again on each smaller group
+    left_sorted = merge_sort(left_half)
+    right_sorted = merge_sort(right_half)
+
+    # Putting the two sorted groups back together
+    return merge(left_sorted, right_sorted)
 
 
 def merge(left, right):
@@ -96,7 +113,34 @@ def merge(left, right):
     - Return the merged sorted list.
     - Add meaningful comments.
     """
-    pass
+
+    # Starting with an empty list for the final scores
+    result = []
+
+    # Using these to keep track of where I am in each list
+    i = 0
+    j = 0
+
+    # Comparing scores until one of the lists runs out
+    while i < len(left) and j < len(right):
+
+        # Putting the higher acuity score into the new list first
+        if left[i] >= right[j]:
+            result.append(left[i])
+            i += 1
+
+        else:
+            result.append(right[j])
+            j += 1
+
+    # Adding anything left over from the first group
+    result.extend(left[i:])
+
+    # Adding anything left over from the second group
+    result.extend(right[j:])
+
+    # Returning the finished list
+    return result
 
 
 def main():
@@ -117,30 +161,32 @@ def main():
 
     print("\n=== DATASET #1 ===")
 
-    # Fictional patient acuity scores
-    # Higher scores represent greater care needs
+    # Using made-up patient acuity scores for this example
+    # Higher numbers mean the patient has greater care needs
     acuity_scores = [45, 82, 30, 95, 67, 55, 88]
 
-    # Display the original list
+    # Showing the scores before doing anything to them
     print("Original acuity scores:", acuity_scores)
 
-    # Sort the list using Bubble Sort
+    # Trying both sorting methods on the same scores
     bubble_result = bubble_sort(acuity_scores)
+    merge_result = merge_sort(acuity_scores)
 
-    # Display the sorted results
+    # Printing both results so I can compare them
     print("Bubble Sort result:", bubble_result)
+    print("Merge Sort result: ", merge_result)
 
-    # Compare against the expected descending order
+    # Using Python's built-in sort to check my answers
     expected = sorted(acuity_scores, reverse=True)
 
     print("Expected result:  ", expected)
 
-    if bubble_result == expected:
+    # Making sure both methods gave me the right order
+    if bubble_result == expected and merge_result == expected:
         print("RESULT: PASS")
+        print("Both algorithms correctly prioritized Dataset 1.")
     else:
         print("RESULT: FAIL")
-
-    # TODO: Run Merge Sort on Dataset #1 in Push 2
 
 
     # ===============================
@@ -154,7 +200,32 @@ def main():
     # 4. Compare the results.
 
     print("\n=== DATASET #2 ===")
-    print("TODO: Create a second dataset and compare sorting results.")
+
+    # Trying another group of patients with different scores
+    acuity_scores_2 = [72, 28, 91, 64, 39, 85, 51, 96]
+
+    # Showing the second group before sorting
+    print("Original acuity scores:", acuity_scores_2)
+
+    # Running both methods again with the new scores
+    bubble_result_2 = bubble_sort(acuity_scores_2)
+    merge_result_2 = merge_sort(acuity_scores_2)
+
+    # Comparing what each method came up with
+    print("Bubble Sort result:", bubble_result_2)
+    print("Merge Sort result: ", merge_result_2)
+
+    # Checking against the order Python gives me
+    expected_2 = sorted(acuity_scores_2, reverse=True)
+
+    print("Expected result:  ", expected_2)
+
+    # Checking whether both methods match the expected result
+    if bubble_result_2 == expected_2 and merge_result_2 == expected_2:
+        print("RESULT: PASS")
+        print("Both algorithms correctly prioritized Dataset 2.")
+    else:
+        print("RESULT: FAIL")
 
 
     # ===============================
