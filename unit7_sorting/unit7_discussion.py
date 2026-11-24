@@ -17,6 +17,9 @@ Student: Daniel Rehner
 Project: Patient Acuity Tracking for Placement Prioritization
 """
 
+import time
+import random
+
 
 def bubble_sort(lst):
     """
@@ -244,7 +247,219 @@ def main():
     # Explain what happens in each case.
 
     print("\n=== EDGE CASE TESTS ===")
-    print("TODO: Demonstrate and explain edge cases.")
+
+    # EDGE CASE 1: Empty patient list
+    # This could happen when nobody is waiting for placement
+
+    print("\n--- Edge Case 1: Empty List ---")
+
+    empty_list = []
+
+    bubble_empty = bubble_sort(empty_list)
+    merge_empty = merge_sort(empty_list)
+
+    print("Original list:     ", empty_list)
+    print("Bubble Sort result:", bubble_empty)
+    print("Merge Sort result: ", merge_empty)
+
+    if bubble_empty == [] and merge_empty == []:
+        print("RESULT: PASS")
+    else:
+        print("RESULT: FAIL")
+
+    print("Explanation: There are no scores to sort.")
+    print("Both methods return an empty list without errors.")
+
+
+    # EDGE CASE 2: Already sorted patient list
+    # Patients are already organized by acuity
+
+    print("\n--- Edge Case 2: Already Sorted List ---")
+
+    sorted_scores = [95, 85, 75, 65, 55]
+
+    bubble_sorted = bubble_sort(sorted_scores)
+    merge_sorted = merge_sort(sorted_scores)
+
+    print("Original list:     ", sorted_scores)
+    print("Bubble Sort result:", bubble_sorted)
+    print("Merge Sort result: ", merge_sorted)
+
+    if bubble_sorted == sorted_scores and merge_sorted == sorted_scores:
+        print("RESULT: PASS")
+    else:
+        print("RESULT: FAIL")
+
+    print("Explanation: The scores are already in order.")
+    print("Bubble Sort can stop early, while Merge Sort")
+    print("still divides and merges the list.")
+
+
+    # EDGE CASE 3: Patients with the same acuity score
+    # More than one patient could have similar care needs
+
+    print("\n--- Edge Case 3: Duplicate Acuity Scores ---")
+
+    duplicate_scores = [85, 60, 95, 85, 60, 95, 40]
+
+    bubble_duplicates = bubble_sort(duplicate_scores)
+    merge_duplicates = merge_sort(duplicate_scores)
+
+    expected_duplicates = sorted(duplicate_scores, reverse=True)
+
+    print("Original list:     ", duplicate_scores)
+    print("Bubble Sort result:", bubble_duplicates)
+    print("Merge Sort result: ", merge_duplicates)
+    print("Expected result:  ", expected_duplicates)
+
+    if (bubble_duplicates == expected_duplicates
+            and merge_duplicates == expected_duplicates):
+        print("RESULT: PASS")
+    else:
+        print("RESULT: FAIL")
+
+    print("Explanation: Patients can have the same acuity score.")
+    print("Both methods keep the duplicate values while sorting.")
+
+
+    # ===============================
+    # PERFORMANCE ANALYSIS
+    # ===============================
+    #
+    # Compare the efficiency of both sorting algorithms
+    # using a larger dataset.
+
+    print("\n=== PERFORMANCE ANALYSIS ===")
+
+    # Using a seed so I get the same random scores each time
+    random.seed(7)
+
+    # Creating a larger fictional patient dataset
+    large_dataset = [
+        random.randint(1, 100) for _ in range(1000)
+    ]
+
+    print("Number of patient acuity scores:", len(large_dataset))
+
+    # Checking how long Bubble Sort takes
+    start_time = time.perf_counter()
+
+    bubble_large = bubble_sort(large_dataset)
+
+    bubble_time = time.perf_counter() - start_time
+
+    # Checking how long Merge Sort takes on the same data
+    start_time = time.perf_counter()
+
+    merge_large = merge_sort(large_dataset)
+
+    merge_time = time.perf_counter() - start_time
+
+    # Printing the times so I can compare them
+    print(f"Bubble Sort time: {bubble_time:.6f} seconds")
+    print(f"Merge Sort time:  {merge_time:.6f} seconds")
+
+    # Making sure both methods still give the correct result
+    expected_large = sorted(large_dataset, reverse=True)
+
+    if bubble_large == expected_large and merge_large == expected_large:
+        print("RESULT: PASS")
+        print("Both algorithms correctly sorted the larger dataset.")
+    else:
+        print("RESULT: FAIL")
+
+    # Comparing which method was faster during this run
+    if bubble_time < merge_time:
+        print("Bubble Sort was faster during this test.")
+
+    elif merge_time < bubble_time:
+        print("Merge Sort was faster during this test.")
+
+    else:
+        print("Both methods took the same measured time.")
+
+    print("\nTime Complexity Comparison:")
+    print("Bubble Sort best case: O(n)")
+    print("Bubble Sort average and worst case: O(n^2)")
+    print("Merge Sort best, average and worst case: O(n log n)")
+
+    print("\nBubble Sort is easier to follow and can work well")
+    print("with smaller or already sorted lists.")
+    print("Merge Sort generally scales better with larger datasets.")
+
+
+    # ===============================
+    # REAL-WORLD SORTING EXAMPLE
+    # ===============================
+    #
+    # Use patient acuity scores to organize patients
+    # who are waiting for placement review.
+
+    print("\n=== PATIENT PLACEMENT REVIEW ===")
+
+    # Using fictional IDs instead of actual patient information
+    patients = [
+        {"id": "PT001", "acuity": 45},
+        {"id": "PT002", "acuity": 82},
+        {"id": "PT003", "acuity": 30},
+        {"id": "PT004", "acuity": 95},
+        {"id": "PT005", "acuity": 67},
+        {"id": "PT006", "acuity": 55},
+        {"id": "PT007", "acuity": 88}
+    ]
+
+    # Showing the patients before organizing them
+    print("\nOriginal patient list:")
+
+    for patient in patients:
+        print(f"{patient['id']} | Acuity: {patient['acuity']}")
+
+    # Pulling the acuity scores out of the patient records
+    patient_scores = [
+        patient["acuity"] for patient in patients
+    ]
+
+    # Using Merge Sort to organize the acuity scores
+    prioritized_scores = merge_sort(patient_scores)
+
+    # Making a copy so I can match scores back to patient IDs
+    remaining_patients = patients.copy()
+
+    prioritized_patients = []
+
+    # Matching each sorted score to its original patient
+    for score in prioritized_scores:
+
+        for patient in remaining_patients:
+
+            if patient["acuity"] == score:
+
+                prioritized_patients.append(patient)
+
+                # Removing the matched record from the working list
+                # This also helps if two patients have the same score
+                remaining_patients.remove(patient)
+
+                break
+
+    # Printing the new order for placement review
+    print("\nPrioritized patient placement review list:")
+
+    for position, patient in enumerate(prioritized_patients, start=1):
+
+        print(
+            f"Priority {position} | "
+            f"Patient: {patient['id']} | "
+            f"Acuity: {patient['acuity']}"
+        )
+
+    print("\nThis example shows how sorting could help organize")
+    print("patients who are waiting for placement review.")
+    print("Higher acuity scores appear earlier in the list.")
+    print("Actual placement decisions require clinical judgment")
+    print("and consideration of other patient needs.")
+
+    print("\n=== END OF PROGRAM ===")
 
 
 if __name__ == "__main__":
